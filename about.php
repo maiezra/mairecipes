@@ -4,16 +4,25 @@
     <h2 class="section-title">About ChefMate</h2>
     <div class="about-section">
         <div class="about-card">
+            <div class="icon-wrapper">
+                <i class="fas fa-lightbulb"></i>
+            </div>
             <h3>Our Vision</h3>
             <p>At ChefMate, we envision a world where culinary creativity is accessible to everyone. We strive to foster connections and build a global community around food, making cooking an enjoyable and personalized experience for all.</p>
         </div>
         
         <div class="about-card">
+            <div class="icon-wrapper">
+                <i class="fas fa-bullseye"></i>
+            </div>
             <h3>Our Mission</h3>
             <p>Our mission is to empower home cooks and food enthusiasts by providing a platform that offers tailored recipes, inspired by individual preferences and dietary needs. We aim to simplify the cooking process and inspire creativity in the kitchen.</p>
         </div>
         
         <div class="about-card">
+            <div class="icon-wrapper">
+                <i class="fas fa-trophy"></i>
+            </div>
             <h3>Our Goals</h3>
             <ul>
                 <li><strong>Personalization:</strong> Offer a unique cooking experience by providing recipes that match users' dietary preferences, restrictions, and favorite cuisines.</li>
@@ -23,11 +32,17 @@
         </div>
         
         <div class="about-card">
+            <div class="icon-wrapper">
+                <i class="fas fa-users"></i>
+            </div>
             <h3>Our Team</h3>
             <p>ChefMate is developed by a dedicated team of food lovers, tech enthusiasts, and design experts who are passionate about making cooking a delightful experience for everyone. We are committed to continuously improving our platform to better serve our users' needs.</p>
         </div>
         
         <div class="about-card">
+            <div class="icon-wrapper">
+                <i class="fas fa-envelope"></i>
+            </div>
             <h3>Contact Us</h3>
             <p>We love hearing from our users! If you have any questions, suggestions, or feedback, please don't hesitate to reach out to us at <a href="mailto:Feedback@chefmate.com">Feedback@chefmate.com</a>.</p>
         </div>
@@ -37,6 +52,8 @@
 <?php include __DIR__ . '/includes/footer.php'; ?>
 
 <style>
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
 body {
     margin-top: 9rem !important;
     font-family: 'Arial', sans-serif;
@@ -78,11 +95,31 @@ body {
     flex: 1 1 calc(33.333% - 20px);
     max-width: calc(33.333% - 20px);
     box-sizing: border-box;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    position: relative;
 }
 
 .about-card:hover {
     transform: translateY(-10px);
+    background-color: #f9f9f9;
+}
+
+.icon-wrapper {
+    position: absolute;
+    top: -25px;
+    left: 20px;
+    background-color: #ff6b6b;
+    color: #fff;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.about-card:hover .icon-wrapper {
+    transform: rotate(360deg);
+    background-color: #375755;
 }
 
 .about-card h3 {
