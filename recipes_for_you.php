@@ -121,7 +121,7 @@ function isLiked($conn, $user_id, $recipe_id, $is_api) {
                 $is_api = isset($recipe['is_api']) && $recipe['is_api'] == 1;
                 $recipe_id = $is_api ? $recipe['id'] : $recipe['uuid'];
                 $is_liked = isLiked($conn, $user_id, $recipe_id, $is_api);
-                $like_text = $is_liked ? 'Remove Like' : 'Like';
+                $like_text = $is_liked ? 'Unlike' : 'Like';
             ?>
             <div class="col-md-4 mb-4">
                 <div class="card recipe-card h-100">
@@ -133,6 +133,14 @@ function isLiked($conn, $user_id, $recipe_id, $is_api) {
                         <a href='<?php echo $is_api ? 'api_recipe.php?id=' . $recipe['id'] : 'recipe.php?uuid=' . $recipe['uuid']; ?>' class='view-recipe-btn'>
                             View Full Recipe
                         </a>
+                        <form method='POST' action='like_recipe.php' class="like-form">
+                            <input type='hidden' name='recipe_id' value='<?php echo htmlspecialchars($recipe_id); ?>'>
+                            <input type='hidden' name='is_api' value='<?php echo htmlspecialchars($is_api); ?>'>
+                            <input type='hidden' name='redirect_url' value='<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>'>
+                            <button type='submit' name='like_action' class='btn-like'>
+                                <?php echo $like_text; ?>
+                            </button>
+                        </form>
                     </div>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><?php echo htmlspecialchars($recipe['title']); ?></h5>
@@ -141,14 +149,6 @@ function isLiked($conn, $user_id, $recipe_id, $is_api) {
                             <strong>Ingredients:</strong> <?php echo htmlspecialchars($recipe['ingredients']); ?><br>
                             <strong>Instructions:</strong> <?php echo nl2br(htmlspecialchars($recipe['instructions'])); ?><br>
                         </p>
-                        <form method='POST' action='like_recipe.php' class="mt-auto">
-                            <input type='hidden' name='recipe_id' value='<?php echo htmlspecialchars($recipe_id); ?>'>
-                            <input type='hidden' name='is_api' value='<?php echo htmlspecialchars($is_api); ?>'>
-                            <input type='hidden' name='redirect_url' value='<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>'>
-                            <button type='submit' name='like_action' class='btn <?php echo $is_liked ? 'btn-primary' : 'btn-outline-primary'; ?>'>
-                                <?php echo $like_text; ?>
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -203,7 +203,7 @@ body {
     right: 10px;
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
-    border-radius: 70%;
+    border-radius: 50%;
     padding: 10px;
     font-size: 1em;
     font-weight: bold;
@@ -229,6 +229,28 @@ body {
 }
 
 .recipe-card .view-recipe-btn:hover {
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
+}
+
+.recipe-card .like-form {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.recipe-card .btn-like {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.recipe-card .btn-like:hover {
     background: rgba(255, 255, 255, 0.8);
     color: #000;
 }
