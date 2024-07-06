@@ -2,6 +2,7 @@
 function is_logged_in() {
     return isset($_SESSION['user_id']);
 }
+
 function calculate_matching_percentage($recipe, $user) {
     $weights = [
         'dietary_preferences' => 25,
@@ -31,7 +32,8 @@ function calculate_matching_percentage($recipe, $user) {
         $matching += $weights['cooking_skill'];
     }
 
-    if (isset($user['cooking_frequency']) && $recipe['cooking_frequency'] === $user['cooking_frequency']) {
+    // Проверяем, существуют ли индексы cooking_frequency и meal_preferences
+    if (isset($user['cooking_frequency']) && isset($recipe['cooking_frequency']) && $recipe['cooking_frequency'] === $user['cooking_frequency']) {
         $matching += $weights['cooking_frequency'];
     }
 
@@ -43,7 +45,7 @@ function calculate_matching_percentage($recipe, $user) {
         $matching += $weights['dietary_restrictions'];
     }
 
-    if (isset($user['meal_preferences']) && $recipe['meal_preferences'] === $user['meal_preferences']) {
+    if (isset($user['meal_preferences']) && isset($recipe['meal_preferences']) && $recipe['meal_preferences'] === $user['meal_preferences']) {
         $matching += $weights['meal_preferences'];
     }
 
@@ -51,7 +53,7 @@ function calculate_matching_percentage($recipe, $user) {
         $matching += $weights['meal_type'];
     }
 
-    if (isset($user['max_cooking_time']) && $recipe['cooking_time'] <= $user['max_cooking_time']) {
+    if (isset($user['max_cooking_time']) && isset($recipe['cooking_time']) && $recipe['cooking_time'] <= $user['max_cooking_time']) {
         $matching += $weights['cooking_time'];
     } else {
         $matching -= $weights['cooking_time'];
@@ -68,7 +70,4 @@ function has_allergies($ingredients, $allergies) {
     }
     return false;
 }
-
-
-
 ?>
