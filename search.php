@@ -19,7 +19,6 @@ if ($response) {
         $meals = $data['meals'];
     }
 }
-
 ?>
 
 <div class="container">
@@ -36,7 +35,12 @@ if ($response) {
             <?php foreach ($meals as $meal): ?>
             <div class="col-md-4 mb-4">
                 <div class="card recipe-card h-100">
-                    <img src="<?php echo htmlspecialchars($meal['strMealThumb']); ?>" class="card-img-top" alt="Recipe Photo">
+                    <div class="image-container">
+                        <img src="<?php echo htmlspecialchars($meal['strMealThumb']); ?>" class="card-img-top" alt="Recipe Photo">
+                        <a href="api_recipe.php?id=<?php echo htmlspecialchars($meal['idMeal']); ?>" class="view-recipe-btn">
+                            View Full Recipe
+                        </a>
+                    </div>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><?php echo htmlspecialchars($meal['strMeal']); ?></h5>
                         <p class="card-text">
@@ -44,7 +48,6 @@ if ($response) {
                             <strong>Area:</strong> <?php echo htmlspecialchars($meal['strArea']); ?><br>
                             <strong>Instructions:</strong> <?php echo nl2br(htmlspecialchars($meal['strInstructions'])); ?><br>
                         </p>
-                        <a href="api_recipe.php?id=<?php echo htmlspecialchars($meal['idMeal']); ?>" class="btn btn-primary mt-auto">View Full Recipe</a>
                     </div>
                 </div>
             </div>
@@ -82,17 +85,40 @@ body {
     transition: transform 0.2s;
     display: flex;
     flex-direction: column;
-    max-height: 400px; /* Set max height */
+    max-height: 400px;
 }
 
 .recipe-card:hover {
     transform: translateY(-10px);
 }
 
+.recipe-card .image-container {
+    position: relative;
+}
+
 .recipe-card img {
     border-bottom: 1px solid #ddd;
     max-height: 200px;
     object-fit: cover;
+    width: 100%;
+}
+
+.recipe-card .view-recipe-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 0.9em;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.recipe-card .view-recipe-btn:hover {
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
 }
 
 .recipe-card .card-body {
@@ -112,11 +138,6 @@ body {
     font-size: 0.9rem;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-height: 140px; /* Adjust height to ensure content fits within the max height */
-}
-
-.recipe-card .btn {
-    margin-top: 10px;
-    align-self: center;
+    max-height: 140px;
 }
 </style>
