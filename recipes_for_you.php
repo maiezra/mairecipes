@@ -1,10 +1,7 @@
 <?php
-error_reporting(0);
-require __DIR__ . '/includes/db.php';
-require __DIR__ . '/includes/functions.php';
-include __DIR__ . '/includes/header.php';
-include __DIR__ . '/includes/footer.php';
-
+require _DIR_ . '/includes/db.php';
+require _DIR_ . '/includes/functions.php';
+include _DIR_ . '/includes/header.php';
 
 if (!is_logged_in()) {
     header('Location: login.php');
@@ -28,7 +25,7 @@ try {
         'dietary_restrictions' => '',
         'meal_preferences' => '',
         'meal_type' => '',
-        'max_cooking_time' => PHP_INT_MAX, 
+        'max_cooking_time' => PHP_INT_MAX,
     ];
 
     $user_preferences = array_merge($defaults, $user_preferences);
@@ -41,8 +38,8 @@ try {
     die();
 }
 
-$query = "chicken"; 
-$api_url = "https:www.themealdb.com/api/json/v1/1/search.php?s=" . urlencode($query);
+$query = "chicken";
+$api_url = "https://www.themealdb.com/api/json/v1/1/search.php?s=" . urlencode($query);
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $api_url);
@@ -56,9 +53,9 @@ if ($response) {
     $data = json_decode($response, true);
     if (isset($data['meals'])) {
         foreach ($data['meals'] as $meal) {
-            $cooking_time = rand(20, 60);и
-            $cooking_skill = 'Intermediate'; 
-            $meal_type = 'Lunch'; 
+            $cooking_time = rand(20, 60);
+            $cooking_skill = 'Intermediate';
+            $meal_type = 'Lunch';
 
             $api_recipes[] = [
                 'id' => $meal['idMeal'],
@@ -73,12 +70,12 @@ if ($response) {
                     $meal['strIngredient19'], $meal['strIngredient20']
                 ])),
                 'instructions' => $meal['strInstructions'],
-                'dietary_preferences' => '', 
+                'dietary_preferences' => '',
                 'dietary_restrictions' => '',
                 'favorite_cuisine' => $meal['strArea'],
-                'cooking_time' => $cooking_time, 
+                'cooking_time' => $cooking_time,
                 'cooking_skill' => $cooking_skill,
-                'meal_type' => $meal_type, 
+                'meal_type' => $meal_type,
                 'photo' => $meal['strMealThumb'],
                 'src' => $meal['strMealThumb'],
                 'is_api' => 1
@@ -149,6 +146,7 @@ function isLiked($conn, $user_id, $recipe_id, $is_api) {
     </div>
 </div>
 
+<?php include _DIR_ . '/includes/footer.php'; ?>
 
 <style>
 body {
