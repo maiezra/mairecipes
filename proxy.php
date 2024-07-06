@@ -1,8 +1,4 @@
 <?php
-// Include database and functions
-require __DIR__ . '/includes/db.php';
-require __DIR__ . '/includes/functions.php';
-
 $query = isset($_GET['s']) ? urlencode($_GET['s']) : '';
 $url = "https://www.themealdb.com/api/json/v1/1/search.php?s=" . $query;
 
