@@ -82,6 +82,7 @@ body {
     transition: transform 0.2s;
     display: flex;
     flex-direction: column;
+    max-height: 400px; /* Set max height */
 }
 
 .recipe-card:hover {
@@ -109,6 +110,9 @@ body {
 .recipe-card .card-text {
     flex: 1;
     font-size: 0.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 140px; /* Adjust height to ensure content fits within the max height */
 }
 
 .recipe-card .btn {
