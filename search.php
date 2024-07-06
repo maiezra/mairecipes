@@ -34,17 +34,17 @@ if ($response) {
     <div class="row mt-4">
         <?php if (!empty($meals)): ?>
             <?php foreach ($meals as $meal): ?>
-            <div class="col-md-6 mb-4">
-                <div class="card recipe-card">
+            <div class="col-md-4 mb-4">
+                <div class="card recipe-card h-100">
                     <img src="<?php echo htmlspecialchars($meal['strMealThumb']); ?>" class="card-img-top" alt="Recipe Photo">
-                    <div class="card-body">
+                    <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><?php echo htmlspecialchars($meal['strMeal']); ?></h5>
                         <p class="card-text">
                             <strong>Category:</strong> <?php echo htmlspecialchars($meal['strCategory']); ?><br>
                             <strong>Area:</strong> <?php echo htmlspecialchars($meal['strArea']); ?><br>
-                            <strong>Instructions:</strong> <?php echo htmlspecialchars($meal['strInstructions']); ?><br>
+                            <strong>Instructions:</strong> <?php echo nl2br(htmlspecialchars($meal['strInstructions'])); ?><br>
                         </p>
-                        <a href="api_recipe.php?id=<?php echo htmlspecialchars($meal['idMeal']); ?>" class="btn btn-primary btn-block mt-2">View Full Recipe</a>
+                        <a href="api_recipe.php?id=<?php echo htmlspecialchars($meal['idMeal']); ?>" class="btn btn-primary mt-auto">View Full Recipe</a>
                     </div>
                 </div>
             </div>
@@ -80,6 +80,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
 }
 
 .recipe-card:hover {
@@ -88,21 +90,29 @@ body {
 
 .recipe-card img {
     border-bottom: 1px solid #ddd;
+    max-height: 200px;
+    object-fit: cover;
 }
 
 .recipe-card .card-body {
     padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.recipe-card .matching-percentage {
-    font-size: 1.2em;
+.recipe-card .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
 }
 
-.recipe-card .badge-info {
-    font-size: 0.9em;
+.recipe-card .card-text {
+    flex: 1;
+    font-size: 0.9rem;
 }
 
-.recipe-card .btn-block {
+.recipe-card .btn {
     margin-top: 10px;
+    align-self: center;
 }
 </style>
