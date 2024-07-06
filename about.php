@@ -113,7 +113,7 @@ body {
     transform: translateX(-50%);
     background-color: #ff6b6b;
     color: #fff;
-    border-radius: 50%;
+    border-radius: 20%;
     padding: 20px; /* Increased padding to make the circle larger */
     font-size: 2rem; /* Increased font size */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
