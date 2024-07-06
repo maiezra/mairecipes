@@ -25,7 +25,7 @@ $featured_recipes = array_slice($recipes, 0, 3);
 <div class="container mt-5">
     <!-- Logo -->
     <div class="text-center mb-4">
-        <img src="assets/logo.jpg" alt="Website Logo" class="img-fluid" style="max-width: 600px;">
+        <img src="assets/logo.jpeg" alt="Website Logo" class="img-fluid" style="max-width: 600px;">
     </div>
 
     <!-- Featured Recipes -->
