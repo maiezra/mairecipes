@@ -201,13 +201,13 @@ body {
     right: 10px;
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
-    border-radius: 50%;
+    border-radius: 70%;
     padding: 10px;
     font-size: 1em;
     font-weight: bold;
     text-align: center;
-    width: 60px;
-    height: 60px;
+    width: 84px;
+    height: 84px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -218,6 +218,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .recipe-card .card-title {
@@ -226,7 +227,6 @@ body {
 }
 
 .recipe-card .card-text {
-    flex: 1;
     font-size: 0.9rem;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -236,5 +236,9 @@ body {
 .recipe-card .btn {
     margin-top: 10px;
     align-self: center;
+}
+
+.recipe-card .btn-block {
+    margin-top: 10px;
 }
 </style>
