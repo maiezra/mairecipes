@@ -60,7 +60,6 @@ function calculate_matching_percentage($recipe, $user) {
     return $matching;
 }
 
-
 function has_allergies($ingredients, $allergies) {
     foreach (explode(',', $allergies) as $allergy) {
         if (stripos($ingredients, trim($allergy)) !== false) {
