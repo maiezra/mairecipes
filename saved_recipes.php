@@ -70,17 +70,21 @@ usort($all_saved_recipes, function($a, $b) {
     <h2>Saved Recipes</h2>
     <div class="row">
         <?php foreach ($all_saved_recipes as $recipe): ?>
-            <div class="col-md-6 mb-4">
-                <div class="card recipe-card">
-                    <img src="<?php echo htmlspecialchars($recipe['photo'] ?? $recipe['strMealThumb']); ?>" class="card-img-top" alt="Recipe Photo">
-                    <div class="card-body">
+            <div class="col-md-4 mb-4">
+                <div class="card recipe-card h-100">
+                    <div class="image-container">
+                        <img src="<?php echo htmlspecialchars($recipe['photo'] ?? $recipe['strMealThumb']); ?>" class="card-img-top" alt="Recipe Photo">
+                        <a href="<?php echo isset($recipe['uuid']) ? 'recipe.php?uuid=' . $recipe['uuid'] : 'api_recipe.php?id=' . $recipe['idMeal']; ?>" class="view-recipe-btn">
+                            View Full Recipe
+                        </a>
+                    </div>
+                    <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><?php echo htmlspecialchars($recipe['title'] ?? $recipe['strMeal']); ?></h5>
                         <p class="card-text">
                             <strong>Cooking Time:</strong> <?php echo htmlspecialchars($recipe['cooking_time'] ?? 'N/A'); ?> minutes<br>
-                            <strong>Ingredients:</strong> <?php echo htmlspecialchars($recipe['ingredients'] ?? $recipe['strIngredient1'] . ', ' . $recipe['strIngredient2'] . ', ...'); ?><br>
+                            <strong>Ingredients:</strong> <?php echo htmlspecialchars($recipe['ingredients'] ?? ($recipe['strIngredient1'] . ', ' . $recipe['strIngredient2'] . ', ...')); ?><br>
                             <strong>Instructions:</strong> <?php echo nl2br(htmlspecialchars($recipe['instructions'] ?? $recipe['strInstructions'])); ?><br>
                         </p>
-                        <a href="<?php echo isset($recipe['uuid']) ? 'recipe.php?uuid=' . $recipe['uuid'] : 'api_recipe.php?id=' . $recipe['idMeal']; ?>" class="btn btn-primary btn-block mt-2">View Full Recipe</a>
                     </div>
                 </div>
             </div>
@@ -109,18 +113,47 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
 }
 
 .recipe-card:hover {
     transform: translateY(-10px);
 }
 
+.recipe-card .image-container {
+    position: relative;
+}
+
 .recipe-card img {
     border-bottom: 1px solid #ddd;
+    max-height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.recipe-card .view-recipe-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 0.9em;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.recipe-card .view-recipe-btn:hover {
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
 }
 
 .recipe-card .card-body {
     padding: 15px;
+    flex: 1;
 }
 
 .recipe-card .matching-percentage {
