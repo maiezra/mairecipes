@@ -3,6 +3,8 @@ error_reporting(0);
 require __DIR__ . '/includes/db.php';
 require __DIR__ . '/includes/functions.php';
 include __DIR__ . '/includes/header.php';
+include __DIR__ . '/includes/footer.php';
+
 
 if (!is_logged_in()) {
     header('Location: login.php');
@@ -147,7 +149,6 @@ function isLiked($conn, $user_id, $recipe_id, $is_api) {
     </div>
 </div>
 
-<?php include __DIR__ . '/includes/footer.php'; ?>
 
 <style>
 body {
