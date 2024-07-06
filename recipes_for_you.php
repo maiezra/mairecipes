@@ -123,17 +123,17 @@ function isLiked($conn, $user_id, $recipe_id, $is_api) {
                 $is_liked = isLiked($conn, $user_id, $recipe_id, $is_api);
                 $like_text = $is_liked ? 'Remove Like' : 'Like';
             ?>
-            <div class="col-md-6 mb-4">
-                <div class="card recipe-card">
+            <div class="col-md-4 mb-4">
+                <div class="card recipe-card h-100">
                     <img src="<?php echo htmlspecialchars($recipe['photo'] ? $recipe['photo'] : $recipe['src']); ?>" class="card-img-top" alt="Recipe Photo">
-                    <div class="card-body">
+                    <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><?php echo htmlspecialchars($recipe['title']); ?></h5>
                         <p class="card-text">
                             <strong>Cooking Time:</strong> <?php echo htmlspecialchars($recipe['cooking_time']); ?> minutes<br>
                             <strong>Ingredients:</strong> <?php echo htmlspecialchars($recipe['ingredients']); ?><br>
-                            <strong>Instructions:</strong> <?php echo htmlspecialchars($recipe['instructions']); ?><br>
+                            <strong>Instructions:</strong> <?php echo nl2br(htmlspecialchars($recipe['instructions'])); ?><br>
                         </p>
-                        <div class="matching-percentage">
+                        <div class="matching-percentage mt-auto">
                             <span class="badge badge-success" style="font-size: 1.5em;">Summ Match: <?php echo $recipe['matching_total']; ?>%</span>
                         </div>
                         <form method='POST' action='like_recipe.php'>
@@ -173,6 +173,9 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    max-height: 400px; /* Set max height */
 }
 
 .recipe-card:hover {
@@ -181,21 +184,32 @@ body {
 
 .recipe-card img {
     border-bottom: 1px solid #ddd;
+    max-height: 200px;
+    object-fit: cover;
 }
 
 .recipe-card .card-body {
     padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.recipe-card .matching-percentage {
-    font-size: 1.2em;
+.recipe-card .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
 }
 
-.recipe-card .badge-info {
-    font-size: 0.9em;
+.recipe-card .card-text {
+    flex: 1;
+    font-size: 0.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 140px; /* Adjust height to ensure content fits within the max height */
 }
 
-.recipe-card .btn-block {
+.recipe-card .btn {
     margin-top: 10px;
+    align-self: center;
 }
 </style>
