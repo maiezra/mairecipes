@@ -1,4 +1,6 @@
 <?php
+error_reporting(0);
+
 require _DIR_ . '/includes/db.php';
 require _DIR_ . '/includes/functions.php';
 include _DIR_ . '/includes/header.php';
