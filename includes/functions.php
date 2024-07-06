@@ -32,7 +32,6 @@ function calculate_matching_percentage($recipe, $user) {
         $matching += $weights['cooking_skill'];
     }
 
-    // Проверяем, существуют ли индексы cooking_frequency и meal_preferences
     if (isset($user['cooking_frequency']) && isset($recipe['cooking_frequency']) && $recipe['cooking_frequency'] === $user['cooking_frequency']) {
         $matching += $weights['cooking_frequency'];
     }
