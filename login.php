@@ -50,6 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
+    <div class="mt-3">
+        <p>Don't have an account yet? <a href="register.php">Sign up here</a></p>
+        <a href="register.php" class="btn btn-secondary">Register</a>
+    </div>
 </div>
 
 <?php include __DIR__ . '/includes/footer.php'; ?>
