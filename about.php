@@ -91,40 +91,43 @@ body {
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 40px 20px 20px; /* added padding top to create space for icon */
     flex: 1 1 calc(33.333% - 20px);
     max-width: calc(33.333% - 20px);
     box-sizing: border-box;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
     position: relative;
+    text-align: center; /* Center text alignment */
 }
 
 .about-card:hover {
     transform: translateY(-10px);
     background-color: #f9f9f9;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .icon-wrapper {
     position: absolute;
-    top: -25px;
-    left: 20px;
+    top: -40px; /* moved icon to center top */
+    left: 50%;
+    transform: translateX(-50%);
     background-color: #ff6b6b;
     color: #fff;
     border-radius: 50%;
-    padding: 10px;
-    font-size: 1.5rem;
+    padding: 20px; /* Increased padding to make the circle larger */
+    font-size: 2rem; /* Increased font size */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition: transform 0.5s ease, background-color 0.5s ease; /* Made transition duration longer */
 }
 
 .about-card:hover .icon-wrapper {
-    transform: rotate(360deg);
+    transform: translateX(-50%) rotate(360deg);
     background-color: #375755;
 }
 
 .about-card h3 {
     font-size: 1.5rem;
-    margin-bottom: 15px;
+    margin-top: 20px;
     color: #375755;
 }
 
@@ -132,6 +135,7 @@ body {
     font-size: 1rem;
     line-height: 1.5;
     color: #555;
+    margin-top: 15px; /* Added margin top for spacing */
 }
 
 .about-card ul {
