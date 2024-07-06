@@ -125,7 +125,12 @@ function isLiked($conn, $user_id, $recipe_id, $is_api) {
             ?>
             <div class="col-md-4 mb-4">
                 <div class="card recipe-card h-100">
-                    <img src="<?php echo htmlspecialchars($recipe['photo'] ? $recipe['photo'] : $recipe['src']); ?>" class="card-img-top" alt="Recipe Photo">
+                    <div class="image-container">
+                        <img src="<?php echo htmlspecialchars($recipe['photo'] ? $recipe['photo'] : $recipe['src']); ?>" class="card-img-top" alt="Recipe Photo">
+                        <div class="match-percentage">
+                            Summ Match: <?php echo $recipe['matching_total']; ?>%
+                        </div>
+                    </div>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><?php echo htmlspecialchars($recipe['title']); ?></h5>
                         <p class="card-text">
@@ -133,10 +138,7 @@ function isLiked($conn, $user_id, $recipe_id, $is_api) {
                             <strong>Ingredients:</strong> <?php echo htmlspecialchars($recipe['ingredients']); ?><br>
                             <strong>Instructions:</strong> <?php echo nl2br(htmlspecialchars($recipe['instructions'])); ?><br>
                         </p>
-                        <div class="matching-percentage mt-auto">
-                            <span class="badge badge-success" style="font-size: 1.5em;">Summ Match: <?php echo $recipe['matching_total']; ?>%</span>
-                        </div>
-                        <form method='POST' action='like_recipe.php'>
+                        <form method='POST' action='like_recipe.php' class="mt-auto">
                             <input type='hidden' name='recipe_id' value='<?php echo htmlspecialchars($recipe_id); ?>'>
                             <input type='hidden' name='is_api' value='<?php echo htmlspecialchars($is_api); ?>'>
                             <input type='hidden' name='redirect_url' value='<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>'>
@@ -175,17 +177,40 @@ body {
     transition: transform 0.2s;
     display: flex;
     flex-direction: column;
-    max-height: 400px; /* Set max height */
+    max-height: 400px;
 }
 
 .recipe-card:hover {
     transform: translateY(-10px);
 }
 
+.recipe-card .image-container {
+    position: relative;
+}
+
 .recipe-card img {
     border-bottom: 1px solid #ddd;
     max-height: 200px;
     object-fit: cover;
+    width: 100%;
+}
+
+.recipe-card .match-percentage {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .recipe-card .card-body {
@@ -205,7 +230,7 @@ body {
     font-size: 0.9rem;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-height: 140px; /* Adjust height to ensure content fits within the max height */
+    max-height: 140px;
 }
 
 .recipe-card .btn {
