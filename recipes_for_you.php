@@ -1,9 +1,10 @@
 <?php
-error_reporting(0);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-require _DIR_ . '/includes/db.php';
-require _DIR_ . '/includes/functions.php';
-include _DIR_ . '/includes/header.php';
+require __DIR__ . '/includes/db.php';
+require __DIR__ . '/includes/functions.php';
+include __DIR__ . '/includes/header.php';
 
 if (!is_logged_in()) {
     header('Location: login.php');
@@ -18,6 +19,7 @@ try {
     $user_stmt->execute();
     $user_preferences = $user_stmt->fetch(PDO::FETCH_ASSOC);
 
+    // Инициализируем отсутствующие значения по умолчанию
     $defaults = [
         'dietary_preferences' => '',
         'allergies' => '',
@@ -27,7 +29,7 @@ try {
         'dietary_restrictions' => '',
         'meal_preferences' => '',
         'meal_type' => '',
-        'max_cooking_time' => PHP_INT_MAX,
+        'max_cooking_time' => PHP_INT_MAX, // Устанавливаем максимально возможное значение по умолчанию
     ];
 
     $user_preferences = array_merge($defaults, $user_preferences);
@@ -40,7 +42,7 @@ try {
     die();
 }
 
-$query = "chicken";
+$query = "chicken"; // или другой запрос для получения рецептов из API
 $api_url = "https://www.themealdb.com/api/json/v1/1/search.php?s=" . urlencode($query);
 
 $ch = curl_init();
@@ -55,9 +57,10 @@ if ($response) {
     $data = json_decode($response, true);
     if (isset($data['meals'])) {
         foreach ($data['meals'] as $meal) {
-            $cooking_time = rand(20, 60);
-            $cooking_skill = 'Intermediate';
-            $meal_type = 'Lunch';
+            // Заполняем недостающие данные
+            $cooking_time = rand(20, 60); // Устанавливаем случайное время готовки
+            $cooking_skill = 'Intermediate'; // Пример: Устанавливаем средний уровень навыков готовки
+            $meal_type = 'Lunch'; // Пример: Устанавливаем тип приема пищи
 
             $api_recipes[] = [
                 'id' => $meal['idMeal'],
@@ -72,12 +75,12 @@ if ($response) {
                     $meal['strIngredient19'], $meal['strIngredient20']
                 ])),
                 'instructions' => $meal['strInstructions'],
-                'dietary_preferences' => '',
+                'dietary_preferences' => '', // здесь можно добавить соответствующие данные, если они есть
                 'dietary_restrictions' => '',
                 'favorite_cuisine' => $meal['strArea'],
-                'cooking_time' => $cooking_time,
-                'cooking_skill' => $cooking_skill,
-                'meal_type' => $meal_type,
+                'cooking_time' => $cooking_time, // Устанавливаем время готовки
+                'cooking_skill' => $cooking_skill, // Устанавливаем уровень навыков готовки
+                'meal_type' => $meal_type, // Устанавливаем тип приема пищи
                 'photo' => $meal['strMealThumb'],
                 'src' => $meal['strMealThumb'],
                 'is_api' => 1
@@ -148,7 +151,7 @@ function isLiked($conn, $user_id, $recipe_id, $is_api) {
     </div>
 </div>
 
-<?php include _DIR_ . '/includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/footer.php'; ?>
 
 <style>
 body {
