@@ -51,7 +51,7 @@ $featured_recipes = array_slice($recipes, 0, 3);
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="card tip-card">
-                    <img src="images/tip1.jpg" class="card-img-top" alt="Tip 1">
+                    <img src="assets/tips.jpeg" class="card-img-top" alt="Tip 1">
                     <div class="card-body">
                         <h5 class="card-title">Tip 1</h5>
                         <p class="card-text">Include a variety of fruits and vegetables in your diet to ensure you get a range of nutrients.</p>
@@ -60,7 +60,7 @@ $featured_recipes = array_slice($recipes, 0, 3);
             </div>
             <div class="col-md-4 mb-4">
                 <div class="card tip-card">
-                    <img src="images/tip2.jpg" class="card-img-top" alt="Tip 2">
+                    <img src="assets/tips.jpeg" class="card-img-top" alt="Tip 2">
                     <div class="card-body">
                         <h5 class="card-title">Tip 2</h5>
                         <p class="card-text">Stay hydrated by drinking plenty of water throughout the day. Aim for at least 8 cups of water daily.</p>
@@ -69,7 +69,7 @@ $featured_recipes = array_slice($recipes, 0, 3);
             </div>
             <div class="col-md-4 mb-4">
                 <div class="card tip-card">
-                    <img src="images/tip3.jpg" class="card-img-top" alt="Tip 3">
+                    <img src="assets/tips.jpeg" class="card-img-top" alt="Tip 3">
                     <div class="card-body">
                         <h5 class="card-title">Tip 3</h5>
                         <p class="card-text">Choose whole grains over refined grains to benefit from more fiber and nutrients.</p>
