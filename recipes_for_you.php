@@ -130,6 +130,9 @@ function isLiked($conn, $user_id, $recipe_id, $is_api) {
                         <div class="match-percentage">
                             Summ Match: <?php echo $recipe['matching_total']; ?>%
                         </div>
+                        <a href='<?php echo $is_api ? 'api_recipe.php?id=' . $recipe['id'] : 'recipe.php?uuid=' . $recipe['uuid']; ?>' class='view-recipe-btn'>
+                            View Full Recipe
+                        </a>
                     </div>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><?php echo htmlspecialchars($recipe['title']); ?></h5>
@@ -146,7 +149,6 @@ function isLiked($conn, $user_id, $recipe_id, $is_api) {
                                 <?php echo $like_text; ?>
                             </button>
                         </form>
-                        <a href='<?php echo $is_api ? 'api_recipe.php?id=' . $recipe['id'] : 'recipe.php?uuid=' . $recipe['uuid']; ?>' class='btn btn-primary btn-block mt-2'>View Full Recipe</a>
                     </div>
                 </div>
             </div>
@@ -213,29 +215,35 @@ body {
     align-items: center;
 }
 
+.recipe-card .view-recipe-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 0.9em;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.recipe-card .view-recipe-btn:hover {
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
+}
+
 .recipe-card .card-body {
     padding: 15px;
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
-.recipe-card .card-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
+.recipe-card .matching-percentage {
+    font-size: 1.2em;
 }
 
-.recipe-card .card-text {
-    font-size: 0.9rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-height: 140px;
-}
-
-.recipe-card .btn {
-    margin-top: 10px;
-    align-self: center;
+.recipe-card .badge-info {
+    font-size: 0.9em;
 }
 
 .recipe-card .btn-block {
